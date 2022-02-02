@@ -40,11 +40,12 @@ public class Company {
     private String review;
     private String slogan;
     private String taxId;
+    private String products;
 
     public Company() {
     }
 
-    public Company(Long id, String name, String founder, String address, String areaServed, String award, String brand, String contactPoint, String department, String description, String duns, String email, String employee, String event, String fax_number, LocalDate foundingDate, String foundingLocation, String funder, boolean hasParentOrganisation, boolean hasPos, String knowsAbout, String knowsLanguage, String logoUrl, String member, String parentOrganisation, String phone, String review, String slogan, String taxId) {
+    public Company(Long id, String name, String founder, String address, String areaServed, String award, String brand, String contactPoint, String department, String description, String duns, String email, String employee, String event, String fax_number, LocalDate foundingDate, String foundingLocation, String funder, boolean hasParentOrganisation, boolean hasPos, String knowsAbout, String knowsLanguage, String logoUrl, String member, String parentOrganisation, String phone, String review, String slogan, String taxId, String products) {
         this.id = id;
         this.name = name;
         this.founder = founder;
@@ -74,5 +75,6 @@ public class Company {
         this.review = review;
         this.slogan = slogan;
         this.taxId = taxId;
+        this.products = products;
     }
 }
