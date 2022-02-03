@@ -1,6 +1,8 @@
 package com.clientsadministration.model;
 
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
+@Data
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +46,38 @@ public class Company {
     private String products;
 
     public Company() {
+        foundingDate=LocalDate.now();
+        hasParentOrganisation=false;
+        hasPos=false;
+        name="unknown";
+        founder="unknown";
+        address="unknown";
+        areaServed="unknown";
+        award="unknown";
+        brand="unknown";
+        contactPoint="unknown";
+        department="unknown";
+        description="unknown";
+        duns="unknown";
+        email="unknown";
+        employee="unknown";
+        event="unknown";
+        fax_number="unknown";
+        foundingLocation="unknown";
+        funder="unknown";
+        knowsAbout="unknown";
+        knowsLanguage="unknown";
+        logoUrl="unknown";
+        member="unknown";
+        parentOrganisation="unknown";
+        phone="unknown";
+        review="unknown";
+        slogan="unknown";
+        taxId="unknown";
+        products="unknown";
     }
 
-    public Company(Long id, String name, String founder, String address, String areaServed, String award, String brand, String contactPoint, String department, String description, String duns, String email, String employee, String event, String fax_number, LocalDate foundingDate, String foundingLocation, String funder, boolean hasParentOrganisation, boolean hasPos, String knowsAbout, String knowsLanguage, String logoUrl, String member, String parentOrganisation, String phone, String review, String slogan, String taxId, String products) {
-        this.id = id;
+    public Company(String name, String founder, String address, String areaServed, String award, String brand, String contactPoint, String department, String description, String duns, String email, String employee, String event, String fax_number, LocalDate foundingDate, String foundingLocation, String funder, boolean hasParentOrganisation, boolean hasPos, String knowsAbout, String knowsLanguage, String logoUrl, String member, String parentOrganisation, String phone, String review, String slogan, String taxId, String products) {
         this.name = name;
         this.founder = founder;
         this.address = address;
