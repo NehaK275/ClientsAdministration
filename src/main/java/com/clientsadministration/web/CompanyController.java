@@ -1,11 +1,15 @@
 package com.clientsadministration.web;
 
 import com.clientsadministration.model.Company;
+import com.clientsadministration.repository.CompanyRepository;
 import com.clientsadministration.service.CompanyService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,9 +24,32 @@ public class CompanyController {
         this.companyService = companyService;
     }
     @GetMapping
-    public String showCompanies(Model model)
+    public String showCompanies(Model model, HttpServletRequest request)
     {
-        model.addAttribute("companies",companyService.findAll());
+        Pageable stranica = PageRequest.of(0,5);
+        request.getSession().setAttribute("momentalna",1);
+        model.addAttribute("companies",companyService.findAll(stranica));
+        model.addAttribute("pageSize",companyService.findAll(stranica).getNumberOfElements());
+        model.addAttribute("size",companyService.findAll().size());
+        return "showCompanies";
+    }
+    @GetMapping("{page}")
+    public String ShowCompanies(@PathVariable Integer page,
+                                Model model,HttpServletRequest request)
+    {
+        double listSize = Math.ceil(companyService.findAll().size()/5.0);
+        Integer momentalna = (Integer) request.getSession().getAttribute("momentalna");
+        if(page>listSize && page!= 10 && page!=-1) {
+            return "redirect:/company";
+        }
+        else{
+            momentalna=page;
+            request.getSession().setAttribute("momentalna",momentalna);
+        }
+        Pageable stranica = PageRequest.of(momentalna-1,5);
+        model.addAttribute("size",companyService.findAll().size());
+        model.addAttribute("pageSize",companyService.findAll(stranica).getNumberOfElements());
+        model.addAttribute("companies",companyService.findAll(stranica));
         return "showCompanies";
     }
     @GetMapping("/addCompany")

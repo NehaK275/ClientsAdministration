@@ -4,6 +4,8 @@ import com.clientsadministration.exceptions.InvalidCompanyIdException;
 import com.clientsadministration.model.Company;
 import com.clientsadministration.repository.CompanyRepository;
 import com.clientsadministration.service.CompanyService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +37,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company save(Company c) {
         return companyRepository.save(c);
+    }
+
+    @Override
+    public Page<Company> findAll(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 }
