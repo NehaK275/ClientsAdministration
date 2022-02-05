@@ -30,12 +30,11 @@ public class CompanyController {
     {
         return "add-company";
     }
-    @PostMapping("/save/{id}")
+    @PostMapping("/save")
     public String saveCompany(@RequestParam String name,
                               @RequestParam String address,
                               @RequestParam String brand,
-                              @RequestParam String founder,
-                              @PathVariable(required = false) String id) {
+                              @RequestParam String founder) {
         Company company = new Company();
         company.setName(name);
         company.setAddress(address);
@@ -51,6 +50,21 @@ public class CompanyController {
     {
         model.addAttribute("company",companyService.findById(id));
         return "add-company";
+    }
+    @PostMapping("/save/{id}")
+    public String updateCompany(@RequestParam String name,
+                                @RequestParam String address,
+                                @RequestParam String brand,
+                                @RequestParam String founder,
+                                @PathVariable Long id)
+    {
+        Company company = companyService.findById(id);
+        company.setName(name);
+        company.setAddress(address);
+        company.setBrand(brand);
+        company.setFounder(founder);
+        companyService.save(company);
+        return "redirect:/company";
     }
     //DELETE
     @GetMapping("/delete/{id}")
