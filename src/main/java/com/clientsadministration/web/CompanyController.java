@@ -38,12 +38,17 @@ public class CompanyController {
                                 Model model,HttpServletRequest request)
     {
         double listSize = Math.ceil(companyService.findAll().size()/5.0);
-        Integer momentalna = (Integer) request.getSession().getAttribute("momentalna");
-        if(page>listSize && page!= 10 && page!=-1) {
+        int momentalna;
+        if(page>listSize && page!=10 || page==-1) {
             return "redirect:/company";
         }
         else{
             momentalna=page;
+            request.getSession().setAttribute("momentalna",momentalna);
+        }
+        if(page==10)
+        {
+            momentalna= (int) listSize;
             request.getSession().setAttribute("momentalna",momentalna);
         }
         Pageable stranica = PageRequest.of(momentalna-1,5);

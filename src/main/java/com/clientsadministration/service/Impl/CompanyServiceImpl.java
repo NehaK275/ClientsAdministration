@@ -43,4 +43,9 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<Company> findAll(Pageable pageable) {
         return companyRepository.findAll(pageable);
     }
+
+    @Override
+    public Company create(String name, String founder, String address, String brand) {
+        return this.companyRepository.save(new Company(name,founder,address,brand));
+    }
 }

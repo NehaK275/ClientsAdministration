@@ -13,4 +13,5 @@ public interface CompanyService {
     Company findById(Long id);
     Company save(Company c);
     Page<Company> findAll(Pageable pageable);
+    Company create(String name,String founder,String address,String brand);
 }

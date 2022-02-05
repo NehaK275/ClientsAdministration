@@ -180,12 +180,12 @@
             <div class="clearfix">
                 <div class="hint-text">Showing <b th:text="${pageSize}">5</b> out of <b th:text="${size}"></b> entries</div>
                 <ul class="pagination">
-                    <li class="page-item"><a th:action="@{'/company/{page}' (page=-1)}"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="page-item"><a th:action="@{'/company/{page}' (page=1)}" class="page-link">1</a></li>
-                    <li class="page-item"><a th:href="@{'/company/{page}' (page=2)}" class="page-link">2</a></li>
-                    <li class="page-item"><a th:href="@{'/company/{page}' (page=3)}" class="page-link">3</a></li>
-                    <li class="page-item"><a th:href="@{'/company/{page}' (page=4)}" class="page-link">4</a></li>
-                    <li class="page-item"><a th:href="@{'/company/{page}' (page=5)}" class="page-link">5</a></li>
+                    <li class="page-item"><a th:href="@{'/company/{page}' (page=-1)}" class="page-link"><i class="fa fa-angle-double-left"></i></a></li>
+                    <li class="page-item" th:classappend="${#request.getSession().getAttribute('momentalna')==1}?active:' '"><a th:href="@{'/company/{page}' (page=1)}" class="page-link">1</a></li>
+                    <li class="page-item" th:classappend="${#request.getSession().getAttribute('momentalna')==2}?active:' '"><a th:href="@{'/company/{page}' (page=2)}" class="page-link">2</a></li>
+                    <li class="page-item" th:classappend="${#request.getSession().getAttribute('momentalna')==3}?active:' '"><a th:href="@{'/company/{page}' (page=3)}" class="page-link">3</a></li>
+                    <li class="page-item" th:classappend="${#request.getSession().getAttribute('momentalna')==4}?active:' '"><a th:href="@{'/company/{page}' (page=4)}" class="page-link">4</a></li>
+                    <li class="page-item" th:classappend="${#request.getSession().getAttribute('momentalna')==5}?active:' '"><a th:href="@{'/company/{page}' (page=5)}" class="page-link">5</a></li>
                     <li class="page-item"><a th:href="@{'/company/{page}' (page=10)}" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
                 </ul>
             </div>

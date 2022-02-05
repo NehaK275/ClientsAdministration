@@ -79,6 +79,14 @@ public class Company {
         taxId="unknown";
         products="unknown";
     }
+
+    public Company(String name, String founder, String address, String brand) {
+        this.name = name;
+        this.founder = founder;
+        this.address = address;
+        this.brand = brand;
+    }
+
     @PostConstruct
     public void populateEntities()
     {
