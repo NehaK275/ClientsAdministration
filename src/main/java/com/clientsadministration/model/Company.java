@@ -3,11 +3,11 @@ package com.clientsadministration.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.annotation.PostConstruct;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Data
@@ -45,6 +45,9 @@ public class Company {
     private String taxId;
     private String products;
 
+    @Transient
+    Map<String,Object> entities = new HashMap<>();
+
     public Company() {
         foundingDate=LocalDate.now();
         hasParentOrganisation=false;
@@ -76,7 +79,38 @@ public class Company {
         taxId="unknown";
         products="unknown";
     }
-
+    @PostConstruct
+    public void populateEntities()
+    {
+        entities.put("foundingDate",foundingDate);
+        entities.put("hasParentOrganisation",hasParentOrganisation);
+        entities.put("hasPos",hasPos);
+        entities.put("name",name);
+        entities.put("founder",founder);
+        entities.put("address",address);
+        entities.put("areaServed",areaServed);
+        entities.put("award",award);
+        entities.put("brand",brand);
+        entities.put("contactPoint",contactPoint);
+        entities.put("department",department);
+        entities.put("description",description);
+        entities.put("duns",duns);
+        entities.put("email",email);
+        entities.put("employee",employee);
+        entities.put("event",event);
+        entities.put("fax_number",fax_number);
+        entities.put("foundingLocation",foundingLocation);
+        entities.put("funder",funder);
+        entities.put("knowsAbout",knowsAbout);
+        entities.put("knowsLanguage",knowsLanguage);
+        entities.put("member",member);
+        entities.put("parentOrganisation",parentOrganisation);
+        entities.put("phone",phone);
+        entities.put("review",review);
+        entities.put("slogan",slogan);
+        entities.put("taxId",taxId);
+        entities.put("products",products);
+    }
     public Company(String name, String founder, String address, String areaServed, String award, String brand, String contactPoint, String department, String description, String duns, String email, String employee, String event, String fax_number, LocalDate foundingDate, String foundingLocation, String funder, boolean hasParentOrganisation, boolean hasPos, String knowsAbout, String knowsLanguage, String logoUrl, String member, String parentOrganisation, String phone, String review, String slogan, String taxId, String products) {
         this.name = name;
         this.founder = founder;

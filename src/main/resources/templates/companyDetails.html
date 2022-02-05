@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DETAILS</title>
+</head>
+<h2>Showing details about the company</h2>
+<h3 th:text="${company.getName()}"></h3>
+<body>
+    <ul>
+        <li th:each="key:${entities.keySet()}" th:text="${key} + ' - ' + ${entities.get(key)}"></li>
+    </ul>
+</body>
+</html>

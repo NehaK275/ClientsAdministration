@@ -30,4 +30,14 @@ public class CompanyController {
     {
         return "add-company";
     }
+    @GetMapping("/showDetails/{id}")
+    public String showDetails(@PathVariable Long id,
+                              Model model)
+    {
+        Company company = companyService.findById(id);
+        company.populateEntities();
+        model.addAttribute("entities",company.getEntities());
+        model.addAttribute("company",company);
+        return "companyDetails";
+    }
 }

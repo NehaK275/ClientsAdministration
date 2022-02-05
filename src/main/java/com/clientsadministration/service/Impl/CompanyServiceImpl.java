@@ -1,11 +1,13 @@
 package com.clientsadministration.service.Impl;
 
+import com.clientsadministration.exceptions.InvalidCompanyIdException;
 import com.clientsadministration.model.Company;
 import com.clientsadministration.repository.CompanyRepository;
 import com.clientsadministration.service.CompanyService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -23,5 +25,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void deleteById(Long id) {
         companyRepository.deleteById(id);
+    }
+
+    @Override
+    public Company findById(Long id) {
+        return companyRepository.findById(id).orElseThrow(InvalidCompanyIdException::new);
     }
 }
