@@ -171,8 +171,8 @@
                     <td th:text="${company.getBrand()}"></td>
                     <td>
                         <a th:href="@{'/company/showDetails/{id}' (id=${company.getId()})}" class="view" title="Details" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        <a th:href="@{'/company/edit/{id}' (id=${company.getId()})}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        <a th:href="@{'/company/delete/{id}' (id=${company.getId()})}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                     </td>
                 </tr>
                 </tbody>

@@ -9,4 +9,5 @@ public interface CompanyService {
     List<Company> findAll();
     void deleteById(Long id);
     Company findById(Long id);
+    Company save(Company c);
 }

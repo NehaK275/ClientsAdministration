@@ -30,10 +30,38 @@ public class CompanyController {
     {
         return "add-company";
     }
-    @GetMapping("/showDetails/{id}")
-    public String showDetails(@PathVariable Long id,
+    @PostMapping("/save/{id}")
+    public String saveCompany(@RequestParam String name,
+                              @RequestParam String address,
+                              @RequestParam String brand,
+                              @RequestParam String founder,
+                              @PathVariable(required = false) String id) {
+        Company company = new Company();
+        company.setName(name);
+        company.setAddress(address);
+        company.setBrand(brand);
+        company.setFounder(founder);
+        companyService.save(company);
+        return "redirect:/company";
+    }
+    //EDIT
+    @GetMapping("/edit/{id}")
+    public String editCompany(@PathVariable Long id,
                               Model model)
     {
+        model.addAttribute("company",companyService.findById(id));
+        return "add-company";
+    }
+    //DELETE
+    @GetMapping("/delete/{id}")
+    public String deleteCompany(@PathVariable Long id)
+    {
+        companyService.deleteById(id);
+        return "redirect:/company";
+    }
+    @GetMapping("/showDetails/{id}")
+    public String showDetails(@PathVariable Long id,
+                              Model model) {
         Company company = companyService.findById(id);
         company.populateEntities();
         model.addAttribute("entities",company.getEntities());
