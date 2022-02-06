@@ -66,12 +66,14 @@ public class CompanyController {
     public String saveCompany(@RequestParam String name,
                               @RequestParam String address,
                               @RequestParam String brand,
-                              @RequestParam String founder) {
+                              @RequestParam String founder,
+                              @RequestParam String logoURL) {
         Company company = new Company();
         company.setName(name);
         company.setAddress(address);
         company.setBrand(brand);
         company.setFounder(founder);
+        company.setLogoUrl(logoURL);
         companyService.save(company);
         return "redirect:/company";
     }
@@ -88,6 +90,7 @@ public class CompanyController {
                                 @RequestParam String address,
                                 @RequestParam String brand,
                                 @RequestParam String founder,
+                                @RequestParam String logoURL,
                                 @PathVariable Long id)
     {
         Company company = companyService.findById(id);
@@ -95,6 +98,7 @@ public class CompanyController {
         company.setAddress(address);
         company.setBrand(brand);
         company.setFounder(founder);
+        company.setLogoUrl(logoURL);
         companyService.save(company);
         return "redirect:/company";
     }
