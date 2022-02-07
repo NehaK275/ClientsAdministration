@@ -48,4 +48,14 @@ public class CompanyServiceImpl implements CompanyService {
     public Company create(String name, String founder, String address, String brand) {
         return this.companyRepository.save(new Company(name,founder,address,brand));
     }
+
+    @Override
+    public Page<Company> findAllByNameContaining(Pageable pageable,String text) {
+        return this.companyRepository.findAllByNameContaining(pageable,text);
+    }
+
+    @Override
+    public List<Company> findAllByNameContaining(String text) {
+        return this.companyRepository.findAllByNameContaining(text);
+    }
 }

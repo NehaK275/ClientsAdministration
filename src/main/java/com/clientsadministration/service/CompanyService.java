@@ -14,4 +14,6 @@ public interface CompanyService {
     Company save(Company c);
     Page<Company> findAll(Pageable pageable);
     Company create(String name,String founder,String address,String brand);
+    Page<Company> findAllByNameContaining(Pageable pageable,String text);
+    List<Company> findAllByNameContaining(String text);
 }

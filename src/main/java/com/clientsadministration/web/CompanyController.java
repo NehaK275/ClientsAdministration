@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NamedStoredProcedureQueries;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -23,16 +24,25 @@ public class CompanyController {
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
+
     @GetMapping
-    public String showCompanies(Model model, HttpServletRequest request)
+    public String showCompanies(Model model, HttpServletRequest request , @RequestParam(required = false) String search)
     {
         Pageable stranica = PageRequest.of(0,5);
         request.getSession().setAttribute("momentalna",1);
-        model.addAttribute("companies",companyService.findAll(stranica));
-        model.addAttribute("pageSize",companyService.findAll(stranica).getNumberOfElements());
-        model.addAttribute("size",companyService.findAll().size());
+        if(search == null || search.isEmpty()) {
+            model.addAttribute("companies", companyService.findAll(stranica));
+            model.addAttribute("pageSize", companyService.findAll(stranica).getNumberOfElements());
+            model.addAttribute("size", companyService.findAll().size());
+        }
+        else{
+            model.addAttribute("companies", companyService.findAllByNameContaining(stranica,search));
+            model.addAttribute("pageSize", companyService.findAllByNameContaining(stranica,search).getNumberOfElements());
+            model.addAttribute("size", companyService.findAllByNameContaining(search).size());
+        }
         return "showCompanies";
     }
+
     @GetMapping("{page}")
     public String ShowCompanies(@PathVariable Integer page,
                                 Model model,HttpServletRequest request)
