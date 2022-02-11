@@ -85,6 +85,31 @@ public class Company {
         this.founder = founder;
         this.address = address;
         this.brand = brand;
+        foundingDate=LocalDate.now();
+        hasParentOrganisation=false;
+        hasPos=false;
+        areaServed="unknown";
+        award="unknown";
+        contactPoint="unknown";
+        department="unknown";
+        description="unknown";
+        duns="unknown";
+        email="unknown";
+        employee="unknown";
+        event="unknown";
+        fax_number="unknown";
+        foundingLocation="unknown";
+        funder="unknown";
+        knowsAbout="unknown";
+        knowsLanguage="unknown";
+        logoUrl="unknown";
+        member="unknown";
+        parentOrganisation="unknown";
+        phone="unknown";
+        review="unknown";
+        slogan="unknown";
+        taxId="unknown";
+        products="unknown";
     }
 
     @PostConstruct

@@ -68,23 +68,32 @@
     </style>
 </head>
 <body>
-<form th:method="POST" th:action="@{'/company/save/{id}' (id=${company?.getId()})}">
+<form th:method="POST" th:action="@{'/company/save/{id}' (id=${company?.getId()})}" th:object="${form}">
     <h1>ADD NEW COMPANY</h1>
     <div class="icon">
         <i class="fas fa-user-circle"></i>
     </div>
     <div class="formcontainer">
         <div class="container">
-            <label for="name"><strong>Name</strong></label>
-            <input th:value="${company?.getName()}" type="text" placeholder="Enter name" name="name" id="name" required>
-            <label for="address"><strong>Address</strong></label>
-            <input th:value="${company?.getAddress()}" type="text" placeholder="Enter address" name="address" id="address" required>
-            <label for="logoUrl"><strong>Logo URL</strong></label>
-            <input th:value="${company?.getLogoUrl()}" type="text" placeholder="Enter Logo URL" name="logoURL" id="LogoURL" required>
-            <label for="founder"><strong>Founder</strong></label>
-            <input th:value="${company?.getFounder()}" type="text" placeholder="Enter founder" name="founder" id="founder" required>
-            <label for="brand"><strong>Brand</strong></label>
-            <input th:value="${company?.getBrand()}" type="text" placeholder="Enter brand" name="brand" id="brand" required>
+            <div th:if="${company!=null}">
+                <th:block th:each="key:${entities.keySet()}">
+                    <label th:text="${key}"></label>
+                    <input th:value="${entities.get(key)}" th:name="${key}" th:placeholder="${key}">
+                    <br>
+                </th:block>
+            </div>
+            <div th:if="${company==null}">
+                <label for="name"><strong>Name</strong></label>
+                <input th:value="${company?.getName()}" type="text" placeholder="Enter name" name="name" id="name" required>
+                <label for="address"><strong>Address</strong></label>
+                <input th:value="${company?.getAddress()}" type="text" placeholder="Enter address" name="address" id="address" required>
+                <label for="logoUrl"><strong>Logo URL</strong></label>
+                <input th:value="${company?.getLogoUrl()}" type="text" placeholder="Enter Logo URL" name="logoURL" id="LogoURL" required>
+                <label for="founder"><strong>Founder</strong></label>
+                <input th:value="${company?.getFounder()}" type="text" placeholder="Enter founder" name="founder" id="founder" required>
+                <label for="brand"><strong>Brand</strong></label>
+                <input th:value="${company?.getBrand()}" type="text" placeholder="Enter brand" name="brand" id="brand" required>
+            </div>
         </div>
         <button type="submit"><strong>SAVE COMPANY</strong></button>
     </div>

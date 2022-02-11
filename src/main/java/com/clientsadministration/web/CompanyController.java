@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping({"/company","/"})
@@ -92,23 +93,23 @@ public class CompanyController {
     public String editCompany(@PathVariable Long id,
                               Model model)
     {
-        model.addAttribute("company",companyService.findById(id));
+        Company company = companyService.findById(id);
+        company.populateEntities();
+        model.addAttribute("company",company);
+        model.addAttribute("entities",company.getEntities());
         return "add-company";
     }
     @PostMapping("/save/{id}")
-    public String updateCompany(@RequestParam String name,
-                                @RequestParam String address,
-                                @RequestParam String brand,
-                                @RequestParam String founder,
-                                @RequestParam String logoURL,
+    public String updateCompany(@RequestParam Map<String,String> entities,
                                 @PathVariable Long id)
     {
         Company company = companyService.findById(id);
-        company.setName(name);
-        company.setAddress(address);
-        company.setBrand(brand);
-        company.setFounder(founder);
-        company.setLogoUrl(logoURL);
+
+//        company.setName(name);
+//        company.setAddress(address);
+//        company.setBrand(brand);
+//        company.setFounder(founder);
+//        company.setLogoUrl(logoURL);
         companyService.save(company);
         return "redirect:/company";
     }
