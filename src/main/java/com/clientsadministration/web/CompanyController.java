@@ -1,7 +1,7 @@
 package com.clientsadministration.web;
 
 import com.clientsadministration.model.Company;
-import com.clientsadministration.repository.CompanyRepository;
+import com.clientsadministration.service.CompanyDataSearchService;
 import com.clientsadministration.service.CompanyService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,21 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.NamedStoredProcedureQueries;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping({"/company","/"})
 public class CompanyController {
     private final CompanyService companyService;
+    private final CompanyDataSearchService companyDataSearchService;
 
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyService companyService, CompanyDataSearchService companyDataSearchService) {
         this.companyService = companyService;
+        this.companyDataSearchService = companyDataSearchService;
     }
 
     @GetMapping
@@ -97,6 +94,7 @@ public class CompanyController {
         company.populateEntities();
         model.addAttribute("company",company);
         model.addAttribute("entities",company.getEntities());
+        model.addAttribute("dataSearchValidators",companyDataSearchService.findAll());
         return "add-company";
     }
     @PostMapping("/save/{id}")

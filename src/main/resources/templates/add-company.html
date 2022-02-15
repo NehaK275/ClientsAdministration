@@ -4,17 +4,20 @@
 <title>Add new company</title>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <style>
         html, body {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             font-family: Roboto, Arial, sans-serif;
             font-size: 15px;
         }
+
         form {
             border: 5px solid #f1f1f1;
         }
+
         input[type=text], input[type=password] {
             width: 100%;
             padding: 16px 8px;
@@ -23,12 +26,14 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+
         .icon {
             font-size: 110px;
             display: flex;
             justify-content: center;
             color: #4286f4;
         }
+
         button {
             background-color: #4286f4;
             color: white;
@@ -38,26 +43,32 @@
             cursor: grab;
             width: 48%;
         }
+
         h1 {
-            text-align:center;
-            fone-size:18;
+            text-align: center;
+            fone-size: 18;
         }
+
         button:hover {
             opacity: 0.8;
         }
+
         .formcontainer {
             text-align: center;
             margin: 24px 50px 12px;
         }
+
         .container {
             padding: 16px 0;
-            text-align:left;
+            text-align: left;
         }
+
         span.psw {
             float: right;
             padding-top: 0;
             padding-right: 15px;
         }
+
         /* Change styles for span on extra small screens */
         @media screen and (max-width: 300px) {
             span.psw {
@@ -89,19 +100,35 @@
             </div>
             <div th:if="${company==null}">
                 <label for="name"><strong>Name</strong></label>
-                <input th:value="${company?.getName()}" type="text" placeholder="Enter name" name="name" id="name" required>
+                <input th:value="${company?.getName()}" type="text" placeholder="Enter name" name="name" id="name"
+                       required>
                 <label for="address"><strong>Address</strong></label>
-                <input th:value="${company?.getAddress()}" type="text" placeholder="Enter address" name="address" id="address" required>
+                <input th:value="${company?.getAddress()}" type="text" placeholder="Enter address" name="address"
+                       id="address" required>
                 <label for="logoUrl"><strong>Logo URL</strong></label>
-                <input th:value="${company?.getLogoUrl()}" type="text" placeholder="Enter Logo URL" name="logoURL" id="LogoURL" required>
+                <input th:value="${company?.getLogoUrl()}" type="text" placeholder="Enter Logo URL" name="logoURL"
+                       id="LogoURL" required>
                 <label for="founder"><strong>Founder</strong></label>
-                <input th:value="${company?.getFounder()}" type="text" placeholder="Enter founder" name="founder" id="founder" required>
+                <input th:value="${company?.getFounder()}" type="text" placeholder="Enter founder" name="founder"
+                       id="founder" required>
                 <label for="brand"><strong>Brand</strong></label>
-                <input th:value="${company?.getBrand()}" type="text" placeholder="Enter brand" name="brand" id="brand" required>
+                <input th:value="${company?.getBrand()}" type="text" placeholder="Enter brand" name="brand" id="brand"
+                       required>
             </div>
         </div>
         <button type="submit"><strong>SAVE COMPANY</strong></button>
     </div>
 </form>
+<div class="formcontainer" th:if="${company!=null}">
+    <h3> Search for the company: </h3>
+    <ul>
+        <th:block th:each="search:${dataSearchValidators}">
+            <li><a th:href="@{${search.getUrlPattern()+company.getName()}}" th:text="${search.getName()}" target="myiframe"></a></li>
+        </th:block>
+    </ul>
+</div>
+<div class="iframe" th:if="${company!=null}">
+    <iframe src="https://www.w3schools.com" title="" name="myiframe" style="height: 700px; width: 500px;"></iframe>
+</div>
 </body>
 </html>
