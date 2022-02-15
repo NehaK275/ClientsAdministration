@@ -68,7 +68,7 @@
     </style>
 </head>
 <body>
-<form th:method="POST" th:action="@{'/company/save/{id}' (id=${company?.getId()})}" th:object="${form}">
+<form th:method="POST" th:action="@{'/company/save/{id}' (id=${company?.getId()})}">
     <h1>ADD NEW COMPANY</h1>
     <div class="icon">
         <i class="fas fa-user-circle"></i>
@@ -77,8 +77,13 @@
         <div class="container">
             <div th:if="${company!=null}">
                 <th:block th:each="key:${entities.keySet()}">
-                    <label th:text="${key}"></label>
-                    <input th:value="${entities.get(key)}" th:name="${key}" th:placeholder="${key}">
+                    <label th:text="${key.toString().substring(0,1).toUpperCase() + key.toString().substring(1).toLowerCase()}"></label>
+                    <div th:if="${key.toString().equals('foundingDate')}">
+                        <input type="date" th:value="${entities.get(key)}" th:name="${key}" th:placeholder="${key}">
+                    </div>
+                    <div th:if="${!key.toString().equals('foundingDate')}">
+                        <input type="text" th:value="${entities.get(key)}" th:name="${key}" th:placeholder="${key}">
+                    </div>
                     <br>
                 </th:block>
             </div>

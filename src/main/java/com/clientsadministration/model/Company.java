@@ -143,6 +143,7 @@ public class Company {
         entities.put("slogan",slogan);
         entities.put("taxId",taxId);
         entities.put("products",products);
+        entities.put("logoUrl" , logoUrl);
     }
     public Company(String name, String founder, String address, String areaServed, String award, String brand, String contactPoint, String department, String description, String duns, String email, String employee, String event, String fax_number, LocalDate foundingDate, String foundingLocation, String funder, boolean hasParentOrganisation, boolean hasPos, String knowsAbout, String knowsLanguage, String logoUrl, String member, String parentOrganisation, String phone, String review, String slogan, String taxId, String products) {
         this.name = name;

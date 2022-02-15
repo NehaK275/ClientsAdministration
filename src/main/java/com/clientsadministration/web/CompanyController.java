@@ -100,16 +100,72 @@ public class CompanyController {
         return "add-company";
     }
     @PostMapping("/save/{id}")
-    public String updateCompany(@RequestParam Map<String,String> entities,
-                                @PathVariable Long id)
+    public String updateCompany(
+            @RequestParam String name,
+            @RequestParam String founder,
+            @RequestParam String address,
+            @RequestParam String areaServed,
+            @RequestParam String award,
+            @RequestParam String brand,
+            @RequestParam String contactPoint,
+            @RequestParam String department,
+            @RequestParam String description,
+            @RequestParam String duns,
+            @RequestParam String email,
+            @RequestParam String employee,
+            @RequestParam String event,
+            @RequestParam String fax_number,
+            @RequestParam String foundingDate,
+            @RequestParam String foundingLocation,
+            @RequestParam String funder,
+            @RequestParam boolean hasParentOrganisation,
+            @RequestParam boolean hasPos,
+            @RequestParam String knowsAbout,
+            @RequestParam String knowsLanguage,
+            @RequestParam String logoUrl,
+            @RequestParam String member,
+            @RequestParam String parentOrganisation,
+            @RequestParam String phone,
+            @RequestParam String review,
+            @RequestParam String slogan,
+            @RequestParam String taxId,
+            @RequestParam String products,
+            @PathVariable Long id)
     {
-        Company company = companyService.findById(id);
-
-//        company.setName(name);
-//        company.setAddress(address);
-//        company.setBrand(brand);
-//        company.setFounder(founder);
-//        company.setLogoUrl(logoURL);
+        Company company;
+        if(id != null){
+            company = companyService.findById(id);
+            company.setName(name);
+            company.setFounder(founder);
+            company.setAddress(address);
+            company.setAreaServed(areaServed);
+            company.setAward(award);
+            company.setBrand(brand);
+            company.setContactPoint(contactPoint);
+            company.setDepartment(department);
+            company.setDescription(description);
+            company.setDuns(duns);
+            company.setEmail(email);
+            company.setEvent(event);
+            company.setFax_number(fax_number);
+            company.setFoundingDate(LocalDate.parse(foundingDate));
+            company.setFunder(funder);
+            company.setParentOrganisation(parentOrganisation);
+            company.setHasPos(hasPos);
+            company.setKnowsAbout(knowsAbout);
+            company.setKnowsLanguage(knowsLanguage);
+            company.setLogoUrl(logoUrl);
+            company.setMember(member);
+            company.setParentOrganisation(parentOrganisation);
+            company.setPhone(phone);
+            company.setReview(review);
+            company.setSlogan(slogan);
+            company.setTaxId(taxId);
+            company.setProducts(products);
+        }
+        else{
+            company = new Company(name, founder, address, areaServed, award, brand, contactPoint, department, description, duns, email, employee, event, fax_number,LocalDate.parse(foundingDate), foundingLocation, funder, hasParentOrganisation, hasPos, knowsAbout, knowsLanguage, logoUrl, member, parentOrganisation, phone, review, slogan, taxId, products);
+        }
         companyService.save(company);
         return "redirect:/company";
     }
