@@ -166,6 +166,7 @@ public class CompanyController {
         }
         companyService.save(company);
         return "redirect:/company";
+        //TEST
     }
     //DELETE
     @GetMapping("/delete/{id}")
